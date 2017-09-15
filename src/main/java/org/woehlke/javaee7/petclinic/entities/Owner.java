@@ -22,156 +22,169 @@ import javax.validation.constraints.Digits;
 import java.util.*;
 
 /**
- * Created with IntelliJ IDEA.
- * User: tw
- * Date: 01.01.14
- * Time: 21:08
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: tw Date: 01.01.14 Time: 21:08 To change
+ * this template use File | Settings | File Templates.
  */
 @Entity
 @Table(name = "owners")
 @Indexed
 public class Owner {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-    @Column(name = "first_name")
-    @NotEmpty
-    @Field(index= Index.YES, analyze= Analyze.YES, store= Store.NO)
-    private String firstName;
+	@Column(name = "first_name")
+	@NotEmpty
+	@Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
+	private String firstName;
 
-    @Column(name = "last_name")
-    @NotEmpty
-    @Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
-    private String lastName;
+	@Column(name = "last_name")
+	@NotEmpty
+	@Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
+	private String lastName;
 
-    @Column(name = "address")
-    @NotEmpty
-    @Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
-    private String address;
+	@Column(name = "address")
+	@NotEmpty
+	@Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
+	private String address;
 
-    @Column(name = "city")
-    @NotEmpty
-    @Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
-    private String city;
+	@Column(name = "city")
+	@NotEmpty
+	@Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
+	private String city;
 
-    @Column(name = "telephone")
-    @NotEmpty
-    @Digits(fraction = 0, integer = 10)
-    private String telephone;
+	@Column(name = "email")
+	@NotEmpty
+	@Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
+	private String email;
 
-    @IndexedEmbedded
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner",fetch = FetchType.EAGER)
-    private Set<Pet> pets = new TreeSet<Pet>();
+	@Column(name = "telephone")
+	@NotEmpty
+	@Digits(fraction = 0, integer = 10)
+	private String telephone;
 
-    public void addPet(Pet pet){
-        pets.add(pet);
-        pet.setOwner(this);
-    }
+	@IndexedEmbedded
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner", fetch = FetchType.EAGER)
+	private Set<Pet> pets = new TreeSet<Pet>();
 
-    public Long getId() {
-        return id;
-    }
+	public void addPet(Pet pet) {
+		pets.add(pet);
+		pet.setOwner(this);
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public String getAddress() {
-        return address;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+	public String getAddress() {
+		return address;
+	}
 
-    public String getCity() {
-        return city;
-    }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-    public void setCity(String city) {
-        this.city = city;
-    }
+	public String getCity() {
+		return city;
+	}
 
-    public String getTelephone() {
-        return telephone;
-    }
+	public void setCity(String city) {
+		this.city = city;
+	}
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
+	public String getTelephone() {
+		return telephone;
+	}
 
-    public List<Pet> getPets() {
-        List<Pet> list = new ArrayList<>();
-        for(Pet pet:pets){
-            list.add(pet);
-        }
-        Collections.sort(list);
-        return list;
-    }
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
 
-    public void setPets(Set<Pet> pets) {
-        this.pets = pets;
-    }
+	public List<Pet> getPets() {
+		List<Pet> list = new ArrayList<>();
+		for (Pet pet : pets) {
+			list.add(pet);
+		}
+		Collections.sort(list);
+		return list;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Owner)) return false;
+	public void setPets(Set<Pet> pets) {
+		this.pets = pets;
+	}
 
-        Owner owner = (Owner) o;
+	public String getEmail() {
+		return email;
+	}
 
-        if (address != null ? !address.equals(owner.address) : owner.address != null) return false;
-        if (city != null ? !city.equals(owner.city) : owner.city != null) return false;
-        if (firstName != null ? !firstName.equals(owner.firstName) : owner.firstName != null) return false;
-        if (id != null ? !id.equals(owner.id) : owner.id != null) return false;
-        if (lastName != null ? !lastName.equals(owner.lastName) : owner.lastName != null) return false;
-        if (pets != null ? !pets.equals(owner.pets) : owner.pets != null) return false;
-        if (telephone != null ? !telephone.equals(owner.telephone) : owner.telephone != null) return false;
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-        return true;
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (!(o instanceof Owner))
+			return false;
 
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (city != null ? city.hashCode() : 0);
-        result = 31 * result + (telephone != null ? telephone.hashCode() : 0);
-        result = 31 * result + (pets != null ? pets.hashCode() : 0);
-        return result;
-    }
+		Owner owner = (Owner) o;
 
-    @Override
-    public String toString() {
-        return "Owner{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", address='" + address + '\'' +
-                ", city='" + city + '\'' +
-                ", telephone='" + telephone + '\'' +
-                ", pets=" + pets +
-                '}';
-    }
+		if (address != null ? !address.equals(owner.address) : owner.address != null)
+			return false;
+		if (city != null ? !city.equals(owner.city) : owner.city != null)
+			return false;
+		if (firstName != null ? !firstName.equals(owner.firstName) : owner.firstName != null)
+			return false;
+		if (id != null ? !id.equals(owner.id) : owner.id != null)
+			return false;
+		if (lastName != null ? !lastName.equals(owner.lastName) : owner.lastName != null)
+			return false;
+		if (pets != null ? !pets.equals(owner.pets) : owner.pets != null)
+			return false;
+		if (telephone != null ? !telephone.equals(owner.telephone) : owner.telephone != null)
+			return false;
+
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = id != null ? id.hashCode() : 0;
+		result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+		result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+		result = 31 * result + (address != null ? address.hashCode() : 0);
+		result = 31 * result + (city != null ? city.hashCode() : 0);
+		result = 31 * result + (telephone != null ? telephone.hashCode() : 0);
+		result = 31 * result + (pets != null ? pets.hashCode() : 0);
+		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "Owner{" + "id=" + id + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\''
+				+ ", address='" + address + '\'' + ", city='" + city + '\'' + ", telephone='" + telephone + '\''
+				+ ", pets=" + pets + '}';
+	}
 }
