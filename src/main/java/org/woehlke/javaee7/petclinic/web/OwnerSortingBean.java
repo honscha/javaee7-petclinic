@@ -17,7 +17,7 @@ public class OwnerSortingBean implements Serializable {
 	private SortOrder sortOrderAddress = SortOrder.unsorted;
 	private SortOrder sortOrderCity = SortOrder.unsorted;
 	private SortOrder sortOrderTelephone = SortOrder.unsorted;
-	private sortOrderEmail = SortOrder.unsorted;
+	private SortOrder sortOrderEmail = SortOrder.unsorted;
 
 	public void setSortOrderToName() {
 		sortOrderAddress = SortOrder.unsorted;
